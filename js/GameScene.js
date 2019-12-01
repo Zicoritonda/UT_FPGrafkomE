@@ -1,16 +1,18 @@
-var canvas = document.getElementById('game');
-canvas.width = window.innerWidth*0.7;
-canvas.height = window.innerHeight;
+var gameCanvas = document.getElementById('game');
+// gameCanvas.width = window.innerWidth*0.7;
+// gameCanvas.height = window.innerHeight;
 var gameScene = new THREE.Scene();
-var gameCamera = new THREE.PerspectiveCamera( 75, canvas.width/canvas.height, 0.1, 1000 );
+// var gameCamera = new THREE.PerspectiveCamera( 75, window.innerWidth * 0.7/window.innerHeight, 0.1, 1000 );
+var gameCamera = new THREE.PerspectiveCamera( 75, gameCanvas.width/gameCanvas.height, 0.1, 1000 );
 
-var gameRenderer = new THREE.WebGLRenderer({canvas});
-// var renderer = new THREE.WebGLRenderer();
-gameRenderer.setSize( canvas.width, canvas.height );
+var gameRenderer = new THREE.WebGLRenderer({gameCanvas});
+// var gameRenderer = new THREE.WebGLRenderer();
+gameRenderer.setSize( gameCanvas.width, gameCanvas.height );
 gameRenderer.setClearColor ( 0xffffff );
+// document.body.appendChild( gameRenderer.domElement );
 
-console.log(canvas.width);
-console.log(canvas.height);
+// console.log(canvas.width);
+// console.log(canvas.height);
 
 gameCamera.position.z = 5;
 

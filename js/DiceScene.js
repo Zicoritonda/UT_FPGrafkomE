@@ -1,20 +1,21 @@
 var diceCanvas = document.getElementById('dice');
-diceCanvas.width = window.innerWidth*0.3;
-diceCanvas.height = window.innerHeight*0.5;
+// diceCanvas.width = window.innerWidth*0.3;
+// diceCanvas.height = window.innerHeight*0.5;
 var diceScene = new THREE.Scene();
-var diceCamera = new THREE.PerspectiveCamera( 75, diceCanvas.width/diceCanvas.height, 0.1, 1000 );
+var diceCamera = new THREE.PerspectiveCamera( 75, diceCanvas.width /diceCanvas.height , 0.1, 1000 );
 
-var renderer = new THREE.WebGLRenderer({diceCanvas});
-// var renderer = new THREE.WebGLRenderer();
-renderer.setSize( diceCanvas.width, diceCanvas.height );
-renderer.setClearColor ( 0xefefef );
+var diceRenderer = new THREE.WebGLRenderer({diceCanvas});
+// var diceRenderer = new THREE.WebGLRenderer();
+diceRenderer.setSize( diceCanvas.width, diceCanvas.height );
+diceRenderer.setClearColor ( 0xefefef );
+// document.body.appendChild( diceRenderer.domElement );
 
-console.log(diceCanvas.width);
-console.log(diceCanvas.height);
+// console.log(diceCanvas.width);
+// console.log(diceCanvas.height);
 
 diceCamera.position.z = 5;
 
-var controls = new THREE.OrbitControls(diceCamera, renderer.domElement);
+var controls = new THREE.OrbitControls(diceCamera, diceRenderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.1;
 controls.enableZoom = true;
@@ -42,7 +43,7 @@ var animate = function () {
 	controls.update();
 	requestAnimationFrame( animate );
 
-	renderer.render(diceScene, diceCamera);
+	diceRenderer.render(diceScene, diceCamera);
 };
 
 animate();
