@@ -1,11 +1,12 @@
 var gameCanvas = document.getElementById('game');
-// gameCanvas.width = window.innerWidth*0.7;
-// gameCanvas.height = window.innerHeight;
+// gameCanvas.style.background = "red";
+gameCanvas.width = window.innerWidth*0.7;
+gameCanvas.height = window.innerHeight;
 var gameScene = new THREE.Scene();
 // var gameCamera = new THREE.PerspectiveCamera( 75, window.innerWidth * 0.7/window.innerHeight, 0.1, 1000 );
 var gameCamera = new THREE.PerspectiveCamera( 75, gameCanvas.width/gameCanvas.height, 0.1, 1000 );
 
-var gameRenderer = new THREE.WebGLRenderer({gameCanvas});
+var gameRenderer = new THREE.WebGLRenderer({canvas:gameCanvas});
 // var gameRenderer = new THREE.WebGLRenderer();
 gameRenderer.setSize( gameCanvas.width, gameCanvas.height );
 gameRenderer.setClearColor ( 0xffffff );
@@ -14,12 +15,12 @@ gameRenderer.setClearColor ( 0xffffff );
 // console.log(canvas.width);
 // console.log(canvas.height);
 
-gameCamera.position.z = 5;
+gameCamera.position.z = 10;
 
-var controls = new THREE.OrbitControls(gameCamera, gameRenderer.domElement);
-controls.enableDamping = true;
-controls.dampingFactor = 0.1;
-controls.enableZoom = true;
+var gameControls = new THREE.OrbitControls(gameCamera, gameRenderer.domElement);
+gameControls.enableDamping = true;
+gameControls.dampingFactor = 0.1;
+gameControls.enableZoom = true;
 
 var keyLight = new THREE.DirectionalLight(new THREE.Color('hsl(30, 100%, 75%)'), 1.0);
 keyLight.position.set(-100, 100, 100);
@@ -41,7 +42,7 @@ const mesh = new THREE.Mesh(geometry, material);
 gameScene.add(mesh);
 
 var animate = function () {
-	controls.update();
+	gameControls.update();
 	requestAnimationFrame( animate );
 
 	gameRenderer.render(gameScene, gameCamera);
