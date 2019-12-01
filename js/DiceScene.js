@@ -13,37 +13,56 @@ diceRenderer.setClearColor ( 0xffffff );
 // console.log(diceCanvas.width);
 // console.log(diceCanvas.height);
 
-diceCamera.position.z = 5;
+diceCamera.position.z = 35;
 
-var controls = new THREE.OrbitControls(diceCamera, diceRenderer.domElement);
-controls.enableDamping = true;
-controls.dampingFactor = 0.1;
-controls.enableZoom = true;
+var diceControls = new THREE.OrbitControls(diceCamera, diceRenderer.domElement);
+diceControls.enableDamping = true;
+diceControls.dampingFactor = 0.1;
+diceControls.enableZoom = true;
 
-// var keyLight = new THREE.DirectionalLight(new THREE.Color('hsl(30, 100%, 75%)'), 1.0);
-// keyLight.position.set(-100, 100, 100);
+var diceKeyLight = new THREE.DirectionalLight(new THREE.Color('hsl(30, 100%, 75%)'), 1.0);
+diceKeyLight.position.set(-100, 100, 100);
  
-// var fillLight = new THREE.DirectionalLight(new THREE.Color('hsl(240, 100%, 75%)'), 0.75);
-// fillLight.position.set(100, 0, 100);
+var diceFillLight = new THREE.DirectionalLight(new THREE.Color('hsl(240, 100%, 75%)'), 0.75);
+diceFillLight.position.set(100, 0, 100);
  
-// var backLight = new THREE.DirectionalLight(0xffffff, 1.0);
-// backLight.position.set(100, 0, -100).normalize();
+var diceBackLight = new THREE.DirectionalLight(0xffffff, 1.0);
+diceBackLight.position.set(100, 0, -100).normalize();
  
-diceScene.add(keyLight);
-diceScene.add(fillLight);
-diceScene.add(backLight);
+diceScene.add(diceKeyLight);
+diceScene.add(diceFillLight);
+diceScene.add(diceBackLight);
 
-// const geometry = new THREE.BoxBufferGeometry(1, 1, 1);
-// const material = new THREE.MeshPhongMaterial({color: 'red'});
-// mesh = new THREE.Mesh(geometry, material);
+var dice = new THREE.Object3D();//create an empty container
+       
+var mtlLoader = new THREE.MTLLoader();
+mtlLoader.setTexturePath('assets/');
+mtlLoader.setPath('assets/');
+mtlLoader.load('dice.mtl', function (materials) {
+ 
+    materials.preload();
+ 
+    var objLoader = new THREE.OBJLoader();
+    objLoader.setMaterials(materials);
+    objLoader.setPath('assets/');
+    objLoader.load('dice.obj', function (object) {
+        object.rotation.y = Math.PI/2;
+ 
+        dice.add(object);
+        //object.position.y -= 60;
+    });
+ 
+});
 
-diceScene.add(mesh);
+diceScene.add(dice);
 
-var animate = function () {
-	controls.update();
-	requestAnimationFrame( animate );
+// diceScene.add(mesh);
+
+var diceAnimate = function () {
+	diceControls.update();
+	requestAnimationFrame( diceAnimate );
 
 	diceRenderer.render(diceScene, diceCamera);
 };
 
-animate();
+diceAnimate();
