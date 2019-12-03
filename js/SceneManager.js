@@ -65,16 +65,18 @@ var diceCamera = new THREE.PerspectiveCamera( 75, diceCanvas.width /diceCanvas.h
 diceCamera.position.y = 7;
 diceCamera.position.z = 5;
 
-console.log(diceScene);
+// console.log(diceScene);
 
 var diceRenderer = new THREE.WebGLRenderer({canvas:diceCanvas});
 diceRenderer.setSize( diceCanvas.width, diceCanvas.height );
 diceRenderer.setClearColor ( 0xffffff );
 
-var diceControls = new THREE.OrbitControls(diceCamera, diceRenderer.domElement);
-diceControls.enableDamping = true;
-diceControls.dampingFactor = 0.1;
-diceControls.enableZoom = true;
+// var diceControls = new THREE.OrbitControls(diceCamera, diceRenderer.domElement);
+// diceControls.enableDamping = true;
+// diceControls.dampingFactor = 0.1;
+// diceControls.enableZoom = true;
+
+diceCamera.lookAt(diceScene.position);
  
 diceScene.add(keyLight);
 diceScene.add(fillLight);

@@ -14,7 +14,7 @@ mtlLoader.load('dice2.mtl', function (materials) {
     objLoader.load('dice2.obj', function (object) {
         object.rotation.y = Math.PI/2;
  
-        // diceScene.add(object);
+        dice.add(object);
         //object.position.y -= 60;
     });
  
@@ -23,10 +23,11 @@ mtlLoader.load('dice2.mtl', function (materials) {
 var geometry = new THREE.BoxGeometry( 1, 1, 1 );
 var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
 var cube = new THREE.Mesh( geometry, material );
-diceScene.add( cube );
+cube.position.set(0,0,0);
+// diceScene.add( cube );
 
 // dice.position.set(0,0,0);
-// diceScene.add(dice);
+diceScene.add(dice);
 
 
 class PickHelper {
@@ -283,6 +284,14 @@ const pickPosition = {x: 0, y: 0};
 const pickHelper = new PickHelper();
 clearPickPosition();
 
+function getCanvasRelativePosition(event) {
+    const rect = diceCanvas.getBoundingClientRect();
+    return {
+    x: event.clientX - rect.left,
+    y: event.clientY - rect.top,
+    };
+}
+
 function setPickPosition(event) {
     const pos = getCanvasRelativePosition(event);
     pickPosition.x = (pos.x / diceCanvas.clientWidth ) *  2 - 1;
@@ -301,7 +310,7 @@ function clearPickPosition() {
 // var obj;
 function clickEvent(){
     var obj = pickHelper.clicked(pickPosition, diceScene, diceCamera);
-    // console.log(pickHelper.pick(pickPosition, diceScene, diceCamera));
+    console.log(obj);
     if(obj!=null){
         //reset dice
         dice.position.set(0, 0, 0);
@@ -315,7 +324,23 @@ function clickEvent(){
         console.log("sudah");
     }
   }
+
+function onDocumentMouseDown( event ) {                
+    var mouse3D = new THREE.Vector3( ( event.clientX / diceCanvas.clientWidth ) * 2 - 1,   //x
+                                    -( event.clientY / diceCanvas.clientHeight ) * 2 + 1,  //y
+                                    0.5 );                                            //z
+    projector.unprojectVector( mouse3D, camera );   
+    mouse3D.sub( camera.position );                
+    mouse3D.normalize();
+    var raycaster = new THREE.Raycaster( camera.position, mouse3D );
+    var intersects = raycaster.intersectObjects( objects );
+    // Change color if hit block
+    if ( intersects.length > 0 ) {
+        intersects[ 0 ].object.material.color.setHex( Math.random() * 0xffffff );
+    }
+} 
   
 window.addEventListener('click',clickEvent);
+window.addEventListener('mousemove', setPickPosition);
 window.addEventListener('mouseout', clearPickPosition);
 window.addEventListener('mouseleave', clearPickPosition);
