@@ -1,41 +1,3 @@
-var gameCanvas = document.getElementById('game');
-// gameCanvas.style.background = "red";
-gameCanvas.width = window.innerWidth*0.7;
-gameCanvas.height = window.innerHeight;
-var gameScene = new THREE.Scene();
-// var gameCamera = new THREE.PerspectiveCamera( 75, window.innerWidth * 0.7/window.innerHeight, 0.1, 1000 );
-var gameCamera = new THREE.PerspectiveCamera( 75, gameCanvas.width/gameCanvas.height, 0.1, 1000 );
-
-var gameRenderer = new THREE.WebGLRenderer({canvas:gameCanvas});
-// var gameRenderer = new THREE.WebGLRenderer();
-gameRenderer.setSize( gameCanvas.width, gameCanvas.height );
-gameRenderer.setClearColor ( 0xffffff );
-// document.body.appendChild( gameRenderer.domElement );
-
-// console.log(canvas.width);
-// console.log(canvas.height);
-
-gameCamera.position.y = 20;
-gameCamera.position.z = 80;
-
-var gameControls = new THREE.OrbitControls(gameCamera, gameRenderer.domElement);
-gameControls.enableDamping = true;
-gameControls.dampingFactor = 0.1;
-gameControls.enableZoom = true;
-gameControls.rotateSpeed = 0.05;
-
-var gameKeyLight = new THREE.DirectionalLight(new THREE.Color('hsl(30, 100%, 75%)'), 1.0);
-gameKeyLight.position.set(-100, 100, 100);
- 
-var gameFillLight = new THREE.DirectionalLight(new THREE.Color('hsl(240, 100%, 75%)'), 0.75);
-gameFillLight.position.set(100, 0, 100);
- 
-var gameBackLight = new THREE.DirectionalLight(0xffffff, 1.0);
-gameBackLight.position.set(100, 0, -100).normalize();
- 
-gameScene.add(gameKeyLight);
-gameScene.add(gameFillLight);
-gameScene.add(gameBackLight);
 
 var map = [[1,1,1,1,1,1,1,1],
            [1,2,1,1,2,1,1,4],
@@ -159,11 +121,3 @@ for(let i = 0; i<8; i++){
 
 gameScene.add(mapobj);
 
-var gameAnimate = function () {
-	gameControls.update();
-	requestAnimationFrame( gameAnimate );
-
-	gameRenderer.render(gameScene, gameCamera);
-};
-
-gameAnimate();

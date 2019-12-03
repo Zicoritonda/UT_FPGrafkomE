@@ -62,7 +62,10 @@ diceCanvas.height = window.innerHeight*0.5;
 
 var diceScene = new THREE.Scene();
 var diceCamera = new THREE.PerspectiveCamera( 75, diceCanvas.width /diceCanvas.height , 0.1, 1000 );
-diceCamera.position.z = 35;
+diceCamera.position.y = 7;
+diceCamera.position.z = 5;
+
+console.log(diceScene);
 
 var diceRenderer = new THREE.WebGLRenderer({canvas:diceCanvas});
 diceRenderer.setSize( diceCanvas.width, diceCanvas.height );
