@@ -15,13 +15,14 @@ gameRenderer.setClearColor ( 0xffffff );
 // console.log(canvas.width);
 // console.log(canvas.height);
 
-gameCamera.position.x = 25;
-gameCamera.position.z = 50;
+gameCamera.position.y = 20;
+gameCamera.position.z = 80;
 
 var gameControls = new THREE.OrbitControls(gameCamera, gameRenderer.domElement);
 gameControls.enableDamping = true;
 gameControls.dampingFactor = 0.1;
 gameControls.enableZoom = true;
+gameControls.rotateSpeed = 0.05;
 
 var gameKeyLight = new THREE.DirectionalLight(new THREE.Color('hsl(30, 100%, 75%)'), 1.0);
 gameKeyLight.position.set(-100, 100, 100);
@@ -67,7 +68,7 @@ for(let i = 0; i<8; i++){
                     else if(i>=2 && i<=5 && j>=2 && j<=5) t=2;
                     else if(i>=1 && i<=6 && j>=1 && j<=6) t=1;
                     else t = 0;
-                    object.position.set(i*bpos, t*tpos, j*bpos);
+                    object.position.set((i-4)*bpos, t*tpos, (j-4)*bpos);
                     mapobj.add(object);    
                 });
             });
@@ -86,7 +87,7 @@ for(let i = 0; i<8; i++){
                     else if(i>=2 && i<=5 && j>=2 && j<=5) t=2;
                     else if(i>=1 && i<=6 && j>=1 && j<=6) t=1;
                     else t = 0;
-                    object.position.set(i*bpos, t*tpos, j*bpos);
+                    object.position.set((i-4)*bpos, t*tpos, (j-4)*bpos);
                     
                     if(j>=1 && j<=3) object.rotation.y = Math.PI; //hadap atas
 
@@ -108,7 +109,7 @@ for(let i = 0; i<8; i++){
                     else if(i>=2 && i<=5 && j>=2 && j<=5) t=2;
                     else if(i>=1 && i<=6 && j>=1 && j<=6) t=1;
                     else t = 0;
-                    object.position.set(i*bpos, t*tpos, j*bpos);
+                    object.position.set((i-4)*bpos, t*tpos, (j-4)*bpos);
                     mapobj.add(object);    
                 });
             });
@@ -127,7 +128,7 @@ for(let i = 0; i<8; i++){
                     else if(i>=2 && i<=5 && j>=2 && j<=5) t=2;
                     else if(i>=1 && i<=6 && j>=1 && j<=6) t=1;
                     else t = 0;
-                    object.position.set(i*bpos, t*tpos, j*bpos);
+                    object.position.set((i-4)*bpos, t*tpos, (j-4)*bpos);
                     if(i<=3) object.rotation.y = Math.PI/2; //hadap atas
                     if(i>=4) object.rotation.y = 3*Math.PI/2; //hadap atas
                     mapobj.add(object);    
@@ -148,7 +149,7 @@ for(let i = 0; i<8; i++){
                     else if(i>=2 && i<=5 && j>=2 && j<=5) t=2;
                     else if(i>=1 && i<=6 && j>=1 && j<=6) t=1;
                     else t = 0;
-                    object.position.set(i*bpos, t*tpos, j*bpos);
+                    object.position.set((i-4)*bpos, t*tpos, (j-4)*bpos);
                     mapobj.add(object);    
                 });
             });

@@ -4,28 +4,15 @@
 		<link rel="stylesheet" href="css/style.css">
 	</head>
 	<body>
-		<div id="left-container">
-			<canvas id="game"></canvas>
-		</div>
-		<div id="right-container">
-			<canvas id="player"></canvas>
-			<canvas id="dice"></canvas>
-		</div>
-		
-		<!-- <script src="/js/three.js"></script> -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js"></script>
-		<script src="js/OrbitControls.js"></script>
-	  	<script src="js/OBJLoader.js"></script>
-	  	<script src="js/MTLLoader.js"></script>
-		<!-- <script src="script.js"></script> -->
-		<script src="js/GameScene.js"></script>
-		<script src="js/PlayerScene.js"></script>
-        <script src="js/DiceScene.js"></script>
-        
-        <script>
-            var elems = document.body.getElementsByTagName("*");
-            console.log(elems);
-        </script>
+		<h1 style="position: fixed; top: 45%; left: 45%;">Click to Play</h1>
+
+		<script>
+			function clickEvent(){
+				window.location = "game.html";
+			}
+
+			window.addEventListener('click',clickEvent);
+		</script>
 		
 	</body>
 </html>
