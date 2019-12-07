@@ -22,7 +22,7 @@ var renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setClearColor ( 0xefefef );
 // renderer.setClearColor ( 0xffffff );
-// document.body.appendChild( renderer.domElement );
+document.body.appendChild( renderer.domElement );
 
 //scene.add( cube );
 

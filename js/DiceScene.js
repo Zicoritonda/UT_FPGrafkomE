@@ -1,33 +1,28 @@
 
 var dice = new THREE.Object3D();//create an empty container
-       
-var mtlLoader = new THREE.MTLLoader();
-mtlLoader.setTexturePath('assets/');
-mtlLoader.setPath('assets/');
-mtlLoader.load('dice2.mtl', function (materials) {
+// var obj = loadObject('block3.mtl','block3.obj');
+dice.add(loadObject('dice2.mtl','dice2.obj'));
+// mtlLoader.load('dice2.mtl', function (materials) {
+//     materials.preload();
+//     objLoader.setMaterials(materials);
+//     objLoader.load('dice2.obj', function (object) {
+//         // object.rotation.y = Math.PI/2;
  
-    materials.preload();
+//         dice.add(object);
+//         //object.position.y -= 60;
+//     });
  
-    var objLoader = new THREE.OBJLoader();
-    objLoader.setMaterials(materials);
-    objLoader.setPath('assets/');
-    objLoader.load('dice2.obj', function (object) {
-        object.rotation.y = Math.PI/2;
- 
-        dice.add(object);
-        //object.position.y -= 60;
-    });
- 
-});
+// });
+diceScene.add(dice);
 
-var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
-var cube = new THREE.Mesh( geometry, material );
-cube.position.set(0,0,0);
+// var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+// var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+// var cube = new THREE.Mesh( geometry, material );
+// cube.position.set(0,0,0);
 // diceScene.add( cube );
 
 // dice.position.set(0,0,0);
-diceScene.add(dice);
+// diceScene.add(dice);
 
 
 class PickHelper {
