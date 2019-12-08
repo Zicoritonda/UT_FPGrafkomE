@@ -82,6 +82,7 @@ for(let i=1;i<=2;i++){
     });
     const t = new THREE.Mesh(textgeometry, tmaterial);
     t.position.set(-1.2+10*(i-1),-0.9,0);
+    playerScene.add(t)
 }
 
 function play(){
